@@ -1,4 +1,4 @@
-# keys.ps1
+# keys.ps1 & keys.ps1
 
 Some powershell scripts to quickly drop a keylogger and set it up as a task.
 Remotely exfiltrate keylog file over SMTP channel (Gmail).
